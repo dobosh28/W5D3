@@ -66,4 +66,18 @@ VALUES
     ('Help needed! What is Big O?', 'Can someone please explain Big O to be before I go crazy?!', (SELECT id FROM users WHERE fname = 'Yosyp'));
 
 INSERT INTO
-    
+    question_follows (user_id, question_id)
+VALUES
+    ((SELECT id FROM users WHERE fname = 'Kat'), (SELECT id FROM questions WHERE title LIKE '%join table%')),
+    ((SELECT id FROM users WHERE fname = 'Yosyp'), (SELECT id FROM questions WHERE title LIKE '%Big O%'));
+
+INSERT INTO
+    replies (subject_q, parent_reply, user_id, body)
+VALUES
+    ((SELECT id FROM questions WHERE title LIKE '%join table%'), NULL, (SELECT id FROM users WHERE lname = 'Dobosh'), 'hi kat, great question! join tables is a SQL function that joins multiple tables of data. hope that helps'),
+    ((SELECT id FROM questions WHERE title LIKE '%join table%'), (SELECT id FROM replies WHERE body LIKE '%hope that helps%'), (SELECT id FROM users WHERE lname = 'Smith'), 'thanks, you''re super');
+
+INSERT INTO
+    question_likes (user_id, subject_q)
+VALUES
+   ((SELECT id FROM users WHERE lname = 'Dobosh'), (SELECT id FROM questions WHERE title LIKE '%join table%'));
